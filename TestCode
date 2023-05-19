@@ -1,0 +1,5 @@
+
+currpos = [0, 0]
+beento = [currpos]
+print(currpos)
+print(beento)
