@@ -14,8 +14,11 @@ with open('2015Day3Input.txt') as f:
             currpos = [currpos[0] - 1, currpos[1]]
         beenhere = False
         for x in beento:
-            if x == currpos:
+            if x[0] == currpos[0] and x[1] == currpos[1]:
                 beenhere = True
+                break
         if beenhere == False:
             beento.append(currpos)
-print(len(beento))
+        index = index + 1
+answer = len(beento)
+print(answer)
