@@ -1,0 +1,40 @@
+lights = []
+rows=1000
+columns = 1000
+
+for i in range(rows):
+    line = []
+    for j in range(columns):
+        line.append(0)
+    lights.append(line)
+    
+inp = open("input.txt", 'r')
+file = inp.readlines()
+
+for i in file:
+    now = i.split()
+    if now[0] == 'turn':
+        s = now[2].split(',')
+        e = now[4].split(',')
+        if now[1] == 'on':
+            change = +1
+        elif now[1] == 'off':
+            change = -1
+            
+        for x in range(int(s[0]), int(e[0])+1):
+            for y in range(int(s[1]), int(e[1])+1):
+                lights[x][y] = max(lights[x][y]+change,0)
+    
+    if now[0] == 'toggle':
+        s = now[1].split(',')
+        e = now[3].split(',')
+        for x in range(int(s[0]), int(e[0])+1):
+            for y in range(int(s[1]), int(e[1])+1):
+                lights[x][y] = lights[x][y] +2 
+                
+count = 0
+for i in range(rows):
+    for j in range(columns):
+        count += lights[i][j]
+
+print(count)
