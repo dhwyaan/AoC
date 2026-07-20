@@ -21,6 +21,10 @@ int main()
     input.close();
     std::array<std::array<int, 2>, 8> deltas = {{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}}};
     for (int gen = 0; gen < 100; gen++){
+        boardState.at(0).at(0) = true;
+        boardState.at(rows-1).at(0) = true;
+        boardState.at(rows-1).at(cols-1) = true;
+        boardState.at(0).at(cols-1) = true;
         for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
             int count = 0;
@@ -41,6 +45,10 @@ int main()
         }
         boardState = tempState;
     }
+    boardState.at(0).at(0) = true;
+    boardState.at(rows-1).at(0) = true;
+    boardState.at(rows-1).at(cols-1) = true;
+    boardState.at(0).at(cols-1) = true;
     int count = 0;
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
