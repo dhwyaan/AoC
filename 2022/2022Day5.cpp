@@ -70,6 +70,25 @@ int main()
             }
         }
     }
+
+    /*    SOLUTION FOR PART 2, UNCOMMENT THIS AND COMMENT THE ABOVE BLOCK TO USE
+        while (instructions >> dummy1 >> quantity >> dummy2 >> source >> dummy3 >> destination){
+        std::stack<char> temp;
+        for (int i = 0; i < quantity; i++){
+            if (!stacks[source - 1].empty()){
+                moved = stacks[source - 1].top();
+                stacks[source - 1].pop();
+                temp.push(moved);
+            }
+        }
+        for (int i = 0; i < quantity; i++){
+            while (!temp.empty()){
+                stacks[destination - 1].push(temp.top());
+                temp.pop();
+            }
+        }
+    }
+    */
     
     for (int i = 0; i < stacks.size(); i++){
         std::stack j = stacks[i];
