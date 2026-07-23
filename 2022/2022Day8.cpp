@@ -77,5 +77,40 @@ int main()
         }
     }
     
-    std::cout << visibles.size() + 2 * (gridL + gridW) - 4;
+    std::cout << visibles.size() + 2 * (gridL + gridW) - 4 << std::endl;
+    
+    int scores, left, right, top, bottom = 0;
+    int max_score = 0;
+
+    for (int i = 0; i < gridL; i++) {
+        for (int j = 0; j < gridW; j++) {
+            int current_height = grid[i][j];
+    
+            int up = 0;
+            for (int r = i - 1; r >= 0; r--) {
+                up++;
+                if (grid[r][j] >= current_height) break;
+            }
+            int down = 0;
+            for (int r = i + 1; r < gridL; r++) {
+                down++;
+                if (grid[r][j] >= current_height) break;
+            }
+            int left = 0;
+            for (int c = j - 1; c >= 0; c--) {
+                left++;
+                if (grid[i][c] >= current_height) break;
+            }
+            int right = 0;
+            for (int c = j + 1; c < gridW; c++) {
+                right++;
+                if (grid[i][c] >= current_height) break;
+            }
+    
+            int total_score = up * down * left * right;
+            max_score = std::max(max_score, total_score);
+        }
+    }
+    
+    std::cout << max_score;
 }
