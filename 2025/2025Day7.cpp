@@ -29,6 +29,67 @@ int raysFinder(std::vector<char>& splitter, const std::vector<char>& rays){
     return splits;
 }
 
+unsigned long long quantumCounter(const std::vector<std::vector<char>>& graph){
+    std::vector<std::vector<unsigned int>> quantum;
+    int len = graph.size();
+    int rowSize = graph[0].size();
+    
+    for (int i = 0; i < len; i++){
+        std::vector<unsigned int> row;
+        for (int j = 0; j < rowSize; j++){
+            if (i < 2){
+                if (graph[i][j] == '|'){
+                    row.push_back(1);
+                }
+                else{
+                    row.push_back(0);
+                }
+            }
+            else{
+                row.push_back(0);
+            }
+        }
+        quantum.push_back(row);
+    }
+    
+    for (int i = 2; i < len; i++){
+        for (int j = 0; j < rowSize; j++){
+            if (std::ranges::find(graph[i], '^') != graph[i].end())
+            {
+                if (graph[i][j] == '^'){
+                    quantum[i][j-1] += quantum[i-1][j];
+                    quantum[i][j+1] += quantum[i-1][j];
+                }
+                else{
+                    quantum[i][j] += quantum[i-1][j];
+                }
+            }
+            else{
+                quantum[i][j] += quantum[i-1][j];
+            }
+        }
+    }
+    
+    // for (int i = 0; i < len; i++){
+    //     for (int j = 0; j < rowSize; j++){
+    //         std::cout << quantum[i][j] << ' ';
+    //     }
+    //     std::cout << "     ";
+    //     for (int j = 0; j < rowSize; j++){
+    //         std::cout << graph[i][j];
+    //     }
+    //     std::cout << '\n';
+    // }
+    
+    unsigned long long part2res = 0;
+    
+    for (int i = 0; i < rowSize; i++){
+        part2res += quantum[len-1][i];
+    }
+    
+    return part2res;
+}
+
 int main()
 {
     std::ifstream input("test.txt");
@@ -67,11 +128,7 @@ int main()
     
     std::cout << "Part 1: " << totalSplits << '\n';
     
-    // for (std::vector<char> line: graph){
-    //     for (char i: line){
-    //         std::cout << i;
-    //     }
-    //     std::cout << '\n';
-    // }
+    std::cout << "Part 2: " << quantumCounter(graph);
     
+    return 0;
 }
