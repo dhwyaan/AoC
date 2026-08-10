@@ -31,6 +31,7 @@ std::string part1(std::ifstream& input){
         }
         num += keypad[pos[0]][pos[1]];
     }
+    input.clear(); 
     input.seekg(0, std::ios::beg);
     return num;
 }
@@ -63,6 +64,7 @@ std::string part2(std::ifstream& input){
         }
         num += keypad[pos[0]][pos[1]];
     }
+    input.clear(); 
     input.seekg(0, std::ios::beg);
     return num;
 }
@@ -71,7 +73,7 @@ int main()
 {
     std::ifstream input("input.txt");
     
-    //std::cout << part1(input) << '\n';
+    std::cout << part1(input) << '\n';
     
     std::cout << part2(input);
     
