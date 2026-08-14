@@ -54,7 +54,15 @@ int main(){
         increment(password);
     }
     
-    std::cout << password;
+    std::cout << "Part 1: "<<  password;
+    
+    increment(password);
+    
+    while (!first(password) || !second(password) || !third(password)){
+        increment(password);
+    }
+    
+    std::cout << "\nPart 2: "<<  password;
     
     return 0;
 }
